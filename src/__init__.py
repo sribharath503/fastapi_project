@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from src.books.routes import book_router
+from src.users.routes import user_router
 from .db import engine,Base
 
 Version="v2"
@@ -12,3 +13,5 @@ app=FastAPI(
 Base.metadata.create_all(bind=engine)
 
 app.include_router(book_router,prefix="/api/{version}/books",tags=["books"])
+
+app.include_router(user_router,prefix="/auth",tags=["Authentication"])
